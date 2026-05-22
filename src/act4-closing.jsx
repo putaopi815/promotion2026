@@ -411,7 +411,7 @@ function ClosingFinaleSection() {
                 whiteSpace: "nowrap"
               }}>
 
-              把这一年的<span style={{ color: "var(--accent)" }}>「能力扩展」</span>, 变成对团队和产品的<span style={{ color: "var(--accent)" }}>「持续贡献」</span>。
+              <span style={{ color: "var(--accent)" }}>AI 时代的设计师能做什么?</span> 这一年我先答了一段, 后面的还会继续答下去。
             </div>
           </div>
         </Reveal>

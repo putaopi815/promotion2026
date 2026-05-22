@@ -7,6 +7,7 @@
     "capture": "node tools/capture-slides.mjs"
   },
   "dependencies": {
+    "pptxgenjs": "^4.0.1",
     "puppeteer": "^25.0.4"
   }
 }

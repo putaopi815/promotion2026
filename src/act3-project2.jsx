@@ -752,9 +752,8 @@ function P2WrapSection() {
         {/* Wrap */}
         <Reveal>
           <div style={{ fontSize: "clamp(18px, 1.8vw, 22px)", lineHeight: 1.7, color: "var(--fg-2)", marginBottom: 32 }}>
-            官网目前还没有最终定稿 —— 后续会继续深入研究内容规划和页面设计。<br />
             <span style={{ color: "var(--fg)", fontWeight: 500 }}>
-              这一期我已经留下了两件东西。
+              官网这个项目留下了两个收获:
             </span>
           </div>
         </Reveal>
@@ -768,7 +767,7 @@ function P2WrapSection() {
 
           {[
           ["01", "不同路径尝试的实践经验", "可按需选用", "Recipe"],
-          ["02", "一套官网设计协作 Agent Team", "可复用", "Reusable Team"]].
+          ["02", "一套官网内容设计的 Agent Team", "可复用", "Reusable Team"]].
           map(([n, t, kind, en], i) =>
           <Reveal
             key={i}

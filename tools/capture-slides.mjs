@@ -86,10 +86,12 @@ async function main() {
 
     await new Promise((r) => setTimeout(r, 200));
 
+    // No clip → captures the current viewport. (clip uses document coords, which
+    // would always grab the page-top region and produce 26 identical screenshots.)
     await page.screenshot({
       path: outPath,
       type: "png",
-      clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT },
+      captureBeyondViewport: false,
     });
     console.log(`  ${String(i + 1).padStart(2, " ")}/${SECTION_IDS.length}  ${filename}`);
   }
