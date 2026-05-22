@@ -513,7 +513,7 @@ function P2AgentTeamSection() {
   ["06", "core pages"],
   ["07", "content\ndrafts"],
   ["08", "handoff"],
-  ["99", "decisions"]];
+  ["09", "decisions"]];
 
 
   return (

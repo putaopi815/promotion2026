@@ -1,0 +1,12 @@
+{
+  "name": "promotion2026-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "capture": "node tools/capture-slides.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^25.0.4"
+  }
+}
