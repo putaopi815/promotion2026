@@ -39,7 +39,7 @@ function CoverSection() {
         <Reveal delay="100">
           <div style={{ color: "var(--muted-2)", marginBottom: 6 }}>Document</div>
           <div style={{ color: "var(--fg-2)", fontWeight: 500 }}>Performance Review</div>
-          <div style={{ color: "var(--muted)", marginTop: 2 }}>v1.0 · 2026.05.20</div>
+          <div style={{ color: "var(--muted)", marginTop: 2 }}>2026.05.20</div>
         </Reveal>
         <Reveal delay="200" style={{ textAlign: "center" }}>
           <div style={{ color: "var(--muted-2)", marginBottom: 6 }}>Track</div>
@@ -48,7 +48,7 @@ function CoverSection() {
         </Reveal>
         <Reveal delay="300" style={{ textAlign: "right" }}>
           <div style={{ color: "var(--muted-2)", marginBottom: 6 }}>Reading</div>
-          <div style={{ color: "var(--fg-2)", fontWeight: 500 }}>15 min · 13 chapters</div>
+          <div style={{ color: "var(--fg-2)", fontWeight: 500 }}>15 min · 4 chapters</div>
           <div style={{ color: "var(--muted)", marginTop: 2 }}>scroll to enter</div>
         </Reveal>
       </div>
@@ -418,7 +418,7 @@ function Compass() {
 
       {/* Labels overlaid */}
       <DirLabel pos={{ top: "2%", left: "50%", transform: "translateX(-50%)" }} dir="↑ 向上" cn="持续深耕 × AI" en="设计方法论 / AI 协作" align="center" delay="900" />
-      <DirLabel pos={{ left: "-2%", top: "calc(50% + 28px)" }} dir="↙ 向左" cn="产品上游" en="PRD / 全链路 own" align="left" delay="1000" />
+      <DirLabel pos={{ left: "10%", top: "calc(50% + 28px)" }} dir="↙ 向左" cn="产品上游" en="PRD / 全链路 own" align="left" delay="1000" />
       <DirLabel pos={{ right: "-2%", top: "calc(50% + 28px)" }} dir="↘ 向右" cn="工程下游" en="Vibe Coding" align="left" delay="1100" />
     </div>
   );

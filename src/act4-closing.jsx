@@ -245,7 +245,7 @@ function ClosingCommitSection() {
         <SectionHeader
           index="§ 13"
           kicker="Chapter IV"
-          title="下一个周期, 我想做两件事"
+          title="未来展望"
           meta="1 min" />
         
 
@@ -261,21 +261,21 @@ function ClosingCommitSection() {
           {
             n: "01",
             kicker: "Commitment · 01",
-            title: "把个人学习沉淀成团队知识",
+            title: "把研究做成自己的方法论",
             body: [
-            "这一年我做了不少 AI Agent 设计相关研究 —— Agent 架构、HITL、Prompt、设计系统进化。",
-            "下周期我计划把它们整理成团队可用的设计指南或知识库 ——"],
+            "这一年学习了 Agent 架构、HITL、Google PAIR 原则、设计系统等概念。",
+            "未来我想把它们结构化成自己的设计方法论 —— 判断标准、决策模板、对照库。"],
 
-            tag: "让我的学习变成团队能力",
-            meta: "Personal → Team Knowledge"
+            tag: "让下一次设计能站在上一次的肩膀上",
+            meta: "Insight → Method"
           },
           {
             n: "02",
             kicker: "Commitment · 02",
             title: "在更高一层贡献更多",
             body: [
-            "Canvas Framework 和官网 Agent Team 让我看到 —— 设计师可以在「规则定义层」做更多事。",
-            "下周期我希望继续在范式 / 流程 / 标准上贡献 ——"],
+            "Canvas Framework 让我看到设计师可以在「规则定义层」做更多事。",
+            "未来我希望继续在范式 / 流程 / 标准上贡献。"],
 
             tag: "不只是交付单点设计",
             meta: "Delivery → Rule Definition"
@@ -376,8 +376,8 @@ function ClosingFinaleSection() {
       style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingBottom: 40 }}>
 
       <div className="container" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        {/* Final manifesto — vertically centered in the upper area, shifted up 40px */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateY(-40px)" }}>
+        {/* Final manifesto — vertically centered in the upper area, shifted up 60px */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateY(-60px)" }}>
         <Reveal delay="100">
           <div
             style={{
@@ -401,7 +401,7 @@ function ClosingFinaleSection() {
             </div>
             <div
               style={{
-                fontSize: "clamp(22px, 2.8vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 400,
                 lineHeight: 1.3,
                 letterSpacing: "-0.01em",

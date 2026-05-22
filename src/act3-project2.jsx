@@ -179,7 +179,8 @@ const VIBE_METHODS = [
     sub: "Design system → page",
     bullets: [
       "导入设计系统",
-      "描述需求 → 直接生成页面"
+      "描述需求",
+      "直接生成页面"
     ],
     feature: "依赖系统, 效率高",
     tradeoff: "适用于快速产出不同的风格稿",
@@ -244,51 +245,40 @@ function P2VibeInsightSection() {
           title="AI协作心得"
           meta="Recipe · Insight" />
 
-        {/* Recipe */}
-        <Reveal delay="200">
+        {/* Insight one-liner + Recipe (stacked, full-width) */}
+        <Reveal delay="200" style={{ marginBottom: 80 }}>
+          {/* Insight one-liner sits above the table */}
+          <div style={{ marginBottom: 32 }}>
+            <div className="en" style={{ fontSize: 11, color: "var(--muted)", letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: 10 }}>
+              Insight · My recipe
+            </div>
+            <div style={{ fontSize: "clamp(22px, 2.4vw, 30px)", fontWeight: 400, lineHeight: 1.35, whiteSpace: "nowrap" }}>
+              AI 不是一键生成器, 而是<span style={{ color: "var(--accent)" }}>分阶段</span>的杠杆。
+            </div>
+          </div>
+
+          {/* Recipe table — single grid keeps columns aligned across all rows */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "minmax(180px, 280px) 1fr",
-              gap: "clamp(24px, 4vw, 56px)",
-              marginBottom: 80
+              gridTemplateColumns: "minmax(0, 240px) auto auto",
+              columnGap: 24,
+              rowGap: 0,
+              width: "fit-content",
+              alignItems: "baseline"
             }}>
-
-            <div>
-              <div className="en" style={{ fontSize: 11, color: "var(--muted)", letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: 16 }}>
-                Insight · My recipe
-              </div>
-              <PullQuote style={{ fontSize: "clamp(24px, 2.6vw, 32px)", maxWidth: "16ch" }}>
-                AI 不是一键生成器 ，而是<span style={{ color: "var(--accent)" }}>分阶段</span>的杠杆。
-              </PullQuote>
-            </div>
-
-            <div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 0 }}>
-                {[
-                ["品牌调性 / 元素分析", "Claude Code Agent Team"],
-                ["主视觉元素", "人工设计 + 第三方工具"],
-                ["代码框架", "AI 实现大致结构"],
-                ["细节调试", "回到 Cursor 慢慢调"]].
-                map(([k, v], i) =>
-                <div
-                  key={i}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr auto 1fr",
-                    gap: 24,
-                    alignItems: "baseline",
-                    padding: "12px 0",
-                    borderBottom: "1px solid var(--line)"
-                  }}>
-
-                    <span style={{ fontSize: 15, color: "var(--muted)" }}>{k}</span>
-                    <span style={{ color: "var(--accent)", fontSize: 18 }}>→</span>
-                    <span style={{ fontSize: 16, fontWeight: 500, color: "var(--fg)" }}>{v}</span>
-                  </div>
-                )}
-              </div>
-            </div>
+            {[
+            ["品牌调性 / 元素分析", "Claude Code Agent Team"],
+            ["主视觉元素", "人工设计 + 第三方工具"],
+            ["代码框架", "AI 实现大致结构"],
+            ["细节调试", "回到 Cursor 慢慢调"]].
+            map(([k, v], i) =>
+            <React.Fragment key={i}>
+              <span style={{ fontSize: 15, color: "var(--muted)", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>{k}</span>
+              <span style={{ color: "var(--accent)", fontSize: 18, padding: "12px 0", borderBottom: "1px solid var(--line)" }}>→</span>
+              <span style={{ fontSize: 16, fontWeight: 500, color: "var(--fg)", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>{v}</span>
+            </React.Fragment>
+            )}
           </div>
         </Reveal>
 
@@ -325,8 +315,8 @@ function P2VibeInsightSection() {
 
 function VibeMethodCard({ n, label, title, sub, bullets, pipeline, feature, tradeoff, depth, url }) {
   // depth controls left-rule weight, not color saturation — keep mono
-  const tints = ["var(--bg)", "var(--bg-2)", "var(--bg)"];
-  const bg = tints[depth - 1];
+  // All three method cards share the same bg-2 background for visual consistency
+  const bg = "var(--bg-2)";
   return (
     <Reveal>
       <div
@@ -568,74 +558,81 @@ function P2AgentTeamSection() {
             </div>
           </Reveal>
 
-          {/* 9-stage pipeline — bigger, more deliberate */}
+          {/* 9-stage pipeline — 3-row grid keeps the connector line on the circle's row */}
           <Reveal delay="300">
-            <div style={{ position: "relative", padding: "32px 0" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))`,
+                gridTemplateRows: "auto 16px auto",
+                rowGap: 14,
+                position: "relative",
+                padding: "32px 0"
+              }}>
+              {/* Connector line — sits in row 2 (circle row), spans every column */}
               <div
                 style={{
-                  position: "absolute",
-                  left: "2%",
-                  right: "2%",
-                  top: "50%",
+                  gridColumn: `1 / span ${stages.length}`,
+                  gridRow: "2 / 3",
+                  alignSelf: "center",
                   height: 1,
                   background: "var(--line-strong)",
-                  transform: "translateY(-50%)"
+                  marginLeft: "calc(100% / " + (stages.length * 2) + ")",
+                  marginRight: "calc(100% / " + (stages.length * 2) + ")"
                 }} />
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))`,
-                  gap: 0,
-                  position: "relative",
-                  zIndex: 1
-                }}>
-                {stages.map(([code, name], i) =>
-                  <div
-                    key={i}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 14,
-                      padding: "0 4px"
-                    }}>
-                    <div
-                      className="en"
-                      style={{
-                        fontSize: 11,
-                        color: i === stages.length - 1 ? "var(--accent)" : "var(--muted)",
-                        letterSpacing: "0.1em",
-                        fontVariantNumeric: "tabular-nums",
-                        fontWeight: i === stages.length - 1 ? 500 : 400
-                      }}>
-                      {code}
-                    </div>
-                    <div
-                      style={{
-                        width: 16,
-                        height: 16,
-                        borderRadius: "50%",
-                        background: i === stages.length - 1 ? "var(--accent)" : "var(--bg)",
-                        border: `1.5px solid ${i === stages.length - 1 ? "var(--accent)" : "var(--fg-2)"}`,
-                        boxShadow: i === stages.length - 1 ? "0 0 0 6px var(--accent-soft)" : "none"
-                      }} />
-                    <div
-                      className="mono"
-                      style={{
-                        fontSize: 11,
-                        color: i === stages.length - 1 ? "var(--fg)" : "var(--fg-2)",
-                        fontWeight: i === stages.length - 1 ? 500 : 400,
-                        lineHeight: 1.3,
-                        textAlign: "center",
-                        whiteSpace: "pre-line",
-                        minHeight: 32
-                      }}>
-                      {name}
-                    </div>
-                  </div>
-                )}
-              </div>
+              {stages.map(([code, name], i) =>
+              <React.Fragment key={i}>
+                {/* Row 1 · code */}
+                <div
+                  className="en"
+                  style={{
+                    gridColumn: `${i + 1} / span 1`,
+                    gridRow: "1 / 2",
+                    textAlign: "center",
+                    fontSize: 11,
+                    color: i === stages.length - 1 ? "var(--accent)" : "var(--muted)",
+                    letterSpacing: "0.1em",
+                    fontVariantNumeric: "tabular-nums",
+                    fontWeight: i === stages.length - 1 ? 500 : 400
+                  }}>
+                  {code}
+                </div>
+                {/* Row 2 · circle */}
+                <div
+                  style={{
+                    gridColumn: `${i + 1} / span 1`,
+                    gridRow: "2 / 3",
+                    justifySelf: "center",
+                    alignSelf: "center",
+                    width: 16,
+                    height: 16,
+                    borderRadius: "50%",
+                    background: i === stages.length - 1 ? "var(--accent)" : "var(--bg)",
+                    border: `1.5px solid ${i === stages.length - 1 ? "var(--accent)" : "var(--fg-2)"}`,
+                    boxShadow: i === stages.length - 1 ? "0 0 0 6px var(--accent-soft)" : "none",
+                    position: "relative",
+                    zIndex: 1
+                  }} />
+                {/* Row 3 · name */}
+                <div
+                  className="mono"
+                  style={{
+                    gridColumn: `${i + 1} / span 1`,
+                    gridRow: "3 / 4",
+                    fontSize: 11,
+                    color: i === stages.length - 1 ? "var(--fg)" : "var(--fg-2)",
+                    fontWeight: i === stages.length - 1 ? 500 : 400,
+                    lineHeight: 1.3,
+                    textAlign: "center",
+                    whiteSpace: "pre-line",
+                    minHeight: 32,
+                    padding: "0 4px"
+                  }}>
+                  {name}
+                </div>
+              </React.Fragment>
+              )}
             </div>
           </Reveal>
         </div>
@@ -715,28 +712,16 @@ function P2AgentTeamBSection() {
             </Reveal>
           </div>
 
-          {/* Right column · screenshot placeholder (same size as Case 1/2) */}
+          {/* Right column · screenshot */}
           <Reveal delay="200">
-            <div
-              style={{
-                aspectRatio: "4 / 3",
-                width: "100%",
-                background: "var(--bg-2)",
-                border: "1px dashed var(--line-strong)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 10,
-                color: "var(--muted)",
-                position: "sticky",
-                top: 120
-              }}>
-              <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}>
-                EVIDENCE-E11
+            <div style={{ position: "sticky", top: 120, display: "flex", flexDirection: "column", gap: 10 }}>
+              <img
+                src="uploads/case3-dession1.jpg"
+                alt="Pencil 交互稿全景 / 内容 md 文件夹"
+                style={{ width: "100%", height: "auto", display: "block", border: "1px solid var(--line)" }} />
+              <div className="mono" style={{ fontSize: 11, color: "var(--muted)", letterSpacing: "0.08em" }}>
+                EVIDENCE-E11 · Pencil 交互稿全景 / 内容 md 文件夹
               </div>
-              <div style={{ fontSize: 14 }}>Pencil 交互稿全景 / 内容 md 文件夹</div>
-              <div className="mono" style={{ fontSize: 10, color: "var(--muted-2)", marginTop: 4 }}>· 截图待嵌入 ·</div>
             </div>
           </Reveal>
         </div>
@@ -850,14 +835,43 @@ function P2BonusSection() {
               marginBottom: 24
             }}>
 
-            <div className="mono" style={{ fontSize: 10, color: "var(--muted)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>
-              Log · 搞定音频
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <div className="mono" style={{ fontSize: 10, color: "var(--muted)", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+                Log · 搞定音频
+              </div>
+              <a
+                href="https://11days-phonics-a4e5.vercel.app/today"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "6px 14px",
+                  border: "1px solid var(--accent)",
+                  color: "var(--accent)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  transition: "background 0.2s, color 0.2s"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--accent)";
+                  e.currentTarget.style.color = "var(--bg)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}>
+                <span>查看 case</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>↗</span>
+              </a>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {[
               ["AI 直接生成的音标音频不标准", "✗ 砍", false],
               ["接 OpenAI API 成功, 但没额度", "✗ 砍", false],
-              ["Mac 自带 CLI speak —— 单音节 OK · 双音节出错", "△ 部分用", true]].
+              ["Mac 自带 CLI speak —— 单音节 OK · 双音节出错。于是先用 speak 解决单词音频问题, 写脚本跑了 400 个单词。", "△ 部分用", true]].
               map(([line, status, partial], i) =>
               <div
                 key={i}
@@ -896,7 +910,7 @@ function P2BonusSection() {
               <span className="en" style={{ fontSize: 10, color: "var(--accent)", letterSpacing: "0.16em", marginRight: 10 }}>
                 FINAL
               </span>
-              单词音频 —— 写脚本用 speak 跑了 ~400 个 · 音标音频 —— 我自己录
+              音标音频 —— 为了实现快速落地, 我选择最快速的方式: 自己录。
             </div>
           </div>
         </Reveal>
@@ -913,7 +927,7 @@ function P2BonusSection() {
               whiteSpace: "nowrap"
             }}>
 
-            AI 是杠杆, <span style={{ color: "var(--accent)" }}>撬不动的部分我自己上。</span>
+            AI 是杠杆, <span style={{ color: "var(--accent)" }}>撬不动的部分需要自己变通解决。</span>
           </PullQuote>
         </Reveal>
       </div>

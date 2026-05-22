@@ -180,7 +180,9 @@ function P1FlowSection() {
             color: "var(--fg)",
             maxWidth: "26ch",
             marginTop: 20,
+            paddingTop: 40,
             marginBottom: 56,
+            borderTop: "1px solid var(--line)",
             textWrap: "balance"
           }}>
 
@@ -266,9 +268,8 @@ function P1FlowSection() {
             borderTop: "1px solid var(--line)"
           }}>
 
-          走完这 4 步,我同时回答了两个问题 ——<br />
-          <span style={{ color: "var(--fg)", fontWeight: 500 }}>「任务流程怎么走」</span> 和 <span style={{ color: "var(--fg)", fontWeight: 500 }}>「Mira 整体用什么结构承载内容」</span>。
-          所以下一组 3 个决策,既是流程的,也是布局的。
+          这 4 步做完, <span style={{ color: "var(--fg)", fontWeight: 500 }}>流程和结构同时定下来</span>。<br />
+          下面讲 3 个项目过程中比较重要的决策。
         </Reveal>
 
       </div>
@@ -722,7 +723,7 @@ function P1OutcomeSection() {
                 收获了什么 · Takeaway
               </div>
               <div style={{ fontSize: "clamp(22px, 2.2vw, 30px)", lineHeight: 1.5 }}>
-                第一次从「做交互」上升到「做体系」—— 回答的不再是「界面怎么画」, 而是「Mira 整个内容承载用什么结构」。
+                第一次从「做交互」上升到「做体系」。回答的不再是「界面怎么画」, 而是「Mira 整个内容承载用什么结构」。
               </div>
             </div>
           </div>
@@ -904,7 +905,7 @@ function P1CanvasSection() {
           <CanvasDecision
             n="02"
             last
-            title="入选规则单关化"
+            title="入选规则"
             body={
               <>
                 <p style={{ color: "var(--fg-2)", marginBottom: 16 }}>
@@ -969,7 +970,7 @@ function P1CanvasBSection() {
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
           <CanvasDecision
             n="03"
-            title="穷尽全部交互规则,提取顶层模式 + 能力配置表"
+            title="穷尽交互规则,提取顶层模式 + 能力配置表"
             body={
               <>
                 <PullQuote style={{ fontSize: "clamp(22px, 2.4vw, 30px)", maxWidth: "none", marginBottom: 16 }}>
@@ -984,10 +985,10 @@ function P1CanvasBSection() {
           <CanvasDecision
             n="04"
             last
-            title="交互形态 · 移动端主动砍掉 2 种"
+            title="移动端的取舍"
             body={
               <>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
                   {["Side Panel", "Inline Card 编辑态"].map((s, i) =>
                     <div
                       key={i}
@@ -1067,7 +1068,7 @@ function P1CanvasOutputSection() {
               {[
               ["1 份", "PRD 文档 · 近 600 行", "PRD"],
               ["1 份", "Capability 配置规范 · 18 个配置项", "SPEC"],
-              ["1 套", "Pencil 交互稿", "PNCL"]].
+              ["1 套", "Pencil 交互+UI稿", "PNCL"]].
               map(([v, l, c], i) =>
               <div
                 key={i}
@@ -1097,6 +1098,22 @@ function P1CanvasOutputSection() {
                   <div style={{ fontSize: 15, color: "var(--fg-2)" }}>{l}</div>
                 </div>
               )}
+            </div>
+          </Reveal>
+
+          {/* Anchor line */}
+          <Reveal delay="400">
+            <div
+              style={{
+                marginTop: "clamp(32px, 5vh, 56px)",
+                paddingTop: "clamp(24px, 3vh, 40px)",
+                borderTop: "1px solid var(--line)",
+                fontSize: "clamp(18px, 1.8vw, 24px)",
+                lineHeight: 1.5,
+                color: "var(--fg)",
+                textAlign: "center"
+              }}>
+              这是我第一次, 以<span style={{ color: "var(--accent)" }}>设计师 + PM 的视角</span>独立交付一份完整产出。
             </div>
           </Reveal>
         </div>

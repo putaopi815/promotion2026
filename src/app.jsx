@@ -32,16 +32,16 @@ const SECTIONS = [
   { id: "p2-wrap", label: "留下了什么", short: "21" },
   { id: "p2-bonus", label: "一个小番外", short: "22" },
   { id: "radar", label: "这一年我的能力变化", short: "23" },
-  { id: "commit", label: "下一个周期, 我想做两件事", short: "24" },
+  { id: "commit", label: "未来展望", short: "24" },
   { id: "finale", label: "The Closing Line · 谢谢", short: "25" },
 ];
 
 const CHAPTER_FOR = (idx) => {
-  if (idx <= 2) return "I · 关于我";
-  if (idx <= 13) return "II · 项目 1 · Mira";
-  if (idx <= 22) return "III · 项目 2 · 官网";
-  if (idx <= 24) return "IV · 未来";
-  return "IV · 收束";
+  if (idx <= 2) return "Chapter I · 关于我";
+  if (idx <= 13) return "Chapter II · 项目 1 · Mira";
+  if (idx <= 22) return "Chapter III · 项目 2 · 官网";
+  if (idx <= 24) return "Chapter IV · 未来";
+  return "Chapter IV · 收束";
 };
 
 function TopBar({ progress, activeIdx }) {
@@ -70,15 +70,15 @@ function TopBar({ progress, activeIdx }) {
 
 // Anchor groups — fewer dots, grouped by chapter + case.
 const NAV_GROUPS = [
-  { label: "I · 关于我",            startId: "cover",            endId: "directions" },
-  { label: "II · Case 1 · 交互布局与流程", startId: "p1-overview",      endId: "p1-outcome" },
-  { label: "II · Case 2 · Canvas Framework", startId: "p1-canvas-intro", endId: "p1-canvas-output" },
-  { label: "II · 共性",             startId: "p1-synth",         endId: "p1-synth" },
-  { label: "III · 视觉与动效",       startId: "p2-overview",      endId: "p2-vibe-insight" },
-  { label: "III · 架构与内容",       startId: "p2-agent",         endId: "p2-agent-b" },
-  { label: "III · 番外 + 收束",      startId: "p2-wrap",          endId: "p2-bonus" },
-  { label: "IV · 未来",             startId: "radar",            endId: "commit" },
-  { label: "IV · 收束",             startId: "finale",           endId: "finale" }
+  { label: "Chapter I · 关于我",            startId: "cover",            endId: "directions" },
+  { label: "Chapter II · Case 1 · 交互布局与流程", startId: "p1-overview",      endId: "p1-outcome" },
+  { label: "Chapter II · Case 2 · Canvas Framework", startId: "p1-canvas-intro", endId: "p1-canvas-output" },
+  { label: "Chapter II · 共性",             startId: "p1-synth",         endId: "p1-synth" },
+  { label: "Chapter III · 视觉与动效",       startId: "p2-overview",      endId: "p2-vibe-insight" },
+  { label: "Chapter III · 架构与内容",       startId: "p2-agent",         endId: "p2-agent-b" },
+  { label: "Chapter III · 番外 + 收束",      startId: "p2-wrap",          endId: "p2-bonus" },
+  { label: "Chapter IV · 未来",             startId: "radar",            endId: "commit" },
+  { label: "Chapter IV · 收束",             startId: "finale",           endId: "finale" }
 ];
 
 function SideNav({ activeIdx, onJump }) {
@@ -182,8 +182,54 @@ function App() {
       goTo(els, target);
     };
 
+    // Wheel: 1 swipe = 1 section jump. Blocks ALL native scrolling while
+    // locked, then snaps to target section. After the smooth scroll settles
+    // we keep the lock until trackpad inertia events die down (idle 150ms).
+    let wheelLock = false;
+    let wheelIdleTimer = null;
+    let unlockTimer = null;
+
+    const onWheel = (e) => {
+      // Capture ALL wheel events while locked to absorb trackpad inertia.
+      e.preventDefault();
+
+      if (wheelLock) {
+        // Reset idle timer — extend lock while inertia keeps firing.
+        clearTimeout(wheelIdleTimer);
+        wheelIdleTimer = setTimeout(() => { wheelLock = false; }, 150);
+        return;
+      }
+
+      const dy = e.deltaY;
+      if (Math.abs(dy) < 1) return;
+
+      const els = SECTIONS.map((s) => document.getElementById(s.id)).filter(Boolean);
+      if (!els.length) return;
+      const cur = getCurrent(els, window.scrollY);
+      const dir = dy > 0 ? 1 : -1;
+      const target = Math.max(0, Math.min(els.length - 1, cur + dir));
+      if (target === cur) return;
+
+      wheelLock = true;
+      goTo(els, target);
+
+      // After the smooth scroll finishes (~600ms), start the idle timer.
+      // Each subsequent wheel event resets it (see above).
+      clearTimeout(unlockTimer);
+      unlockTimer = setTimeout(() => {
+        clearTimeout(wheelIdleTimer);
+        wheelIdleTimer = setTimeout(() => { wheelLock = false; }, 150);
+      }, 600);
+    };
+
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("wheel", onWheel);
+      clearTimeout(wheelIdleTimer);
+      clearTimeout(unlockTimer);
+    };
   }, [t.snap]);
 
   const jump = (id) => {
