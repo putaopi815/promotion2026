@@ -401,7 +401,7 @@ function ClosingFinaleSection() {
             </div>
             <div
               style={{
-                fontSize: "clamp(24px, 3vw, 44px)",
+                fontSize: "clamp(20px, 2.4vw, 36px)",
                 fontWeight: 400,
                 lineHeight: 1.3,
                 letterSpacing: "-0.01em",
