@@ -832,10 +832,7 @@ function P1CanvasIntroSection() {
               background: "var(--accent-soft)",
               borderLeft: "3px solid var(--accent)"
             }}>
-            <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 12, flexWrap: "wrap" }}>
-              <span className="en" style={{ fontSize: 11, color: "var(--accent)", letterSpacing: "0.16em", textTransform: "uppercase" }}>
-                Mira · My definition
-              </span>
+            <div style={{ marginBottom: 12 }}>
               <span style={{ fontSize: 18, fontWeight: 500 }}>卡片统一容器框架</span>
             </div>
             <div style={{ fontSize: 14, color: "var(--fg-2)", lineHeight: 1.7, marginBottom: 12 }}>

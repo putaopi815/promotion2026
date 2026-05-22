@@ -373,11 +373,11 @@ function ClosingFinaleSection() {
       className="section section--tall"
       data-screen-label="14 Finale"
       id="finale"
-      style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingBottom: 40 }}>
+      style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingBottom: 80 }}>
 
       <div className="container" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        {/* Final manifesto — vertically centered in the upper area, shifted up 60px */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateY(-60px)" }}>
+        {/* Final manifesto — vertically centered in the upper area, shifted up 80px */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateY(-80px)" }}>
         <Reveal delay="100">
           <div
             style={{
@@ -401,7 +401,7 @@ function ClosingFinaleSection() {
             </div>
             <div
               style={{
-                fontSize: "clamp(32px, 4vw, 56px)",
+                fontSize: "clamp(24px, 3vw, 44px)",
                 fontWeight: 400,
                 lineHeight: 1.3,
                 letterSpacing: "-0.01em",
